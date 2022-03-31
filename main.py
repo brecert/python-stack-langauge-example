@@ -42,24 +42,15 @@ def parse(str):
 def run(stack):
   while True:
     match stack:
-      case [*stack, a, InstructionType.ADD, b]:
-        stack.append(a + b)
-      case [*stack, a, InstructionType.SUB, b]:
-        stack.append(a - b)
-      case [*stack, a, InstructionType.MUL, b]:
-        stack.append(a * b)
-      case [*stack, a, InstructionType.DIV, b]:
-        stack.append(a / b)
-      case [*stack, InstructionType.END]:
-        break
-      case [*stack, InstructionType.DEO, a]:
-        print(a)
-      case [*stack, InstructionType.DBG]:
-        print(stack[-1])
-      case []:
-        raise Exception("Stack underflow")
-      case _:
-        raise Exception(f"No match for instruction in stack: {stack}")
+      case [*stack, a, InstructionType.ADD, b]: stack.append(a + b)
+      case [*stack, a, InstructionType.SUB, b]: stack.append(a - b)
+      case [*stack, a, InstructionType.MUL, b]: stack.append(a * b)
+      case [*stack, a, InstructionType.DIV, b]: stack.append(a / b)
+      case [*stack, InstructionType.DEO, a]: print(a)
+      case [*stack, InstructionType.DBG]: print(stack[-1])
+      case [*stack, InstructionType.END]: break
+      case []: raise Exception("Stack underflow")
+      case _: raise Exception(f"No match for expression in stack: {stack}")
 
 if __name__ == "__main__":
   stack = parse(" ".join(sys.argv[1:]))
